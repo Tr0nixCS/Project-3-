@@ -129,7 +129,7 @@ void loop()
       display_values();
       displayInfo();
       TempHumi();
-      delay(600e6); //10 min delay når lys nivauet er acceptabelt
+      delay(600000); //10 min delay når lys nivauet er acceptabelt
     }
     else
     {   
