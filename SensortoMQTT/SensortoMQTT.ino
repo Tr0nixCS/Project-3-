@@ -129,7 +129,7 @@ void loop()
       display_values();
       displayInfo();
       TempHumi();
-      ESP.deepSleep(300e6); //10 min delay når lys nivauet er acceptabelt
+      ESP.deepSleep(600e6); //10 min delay når lys nivauet er acceptabelt
     }
     else
     {   
