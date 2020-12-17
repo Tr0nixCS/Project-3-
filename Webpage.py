@@ -48,7 +48,6 @@ def maptab():
     zooom = "17"
     return render_template("map.html", zoom=f"{zooom}", coordinates=coordinates)
 
-
 @app.route("/sams.geojson")                                                     # Puts a small circle at the corrdinates from the GPS in the DB. And shows that on the map page. 
 def samsdata():
     return render_template("sams.geojson.txt", coordinates=coordinates)
