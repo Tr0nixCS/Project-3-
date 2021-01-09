@@ -13,6 +13,9 @@ DHT dht = DHT(DHTPIN, DHTTYPE);
 int RXPin = 12;
 int TXPin = 14;
 
+unsigned long timer = millis();
+unsigned long secondTimer;
+
 static const uint32_t GPSBaud = 9600;
 String hourtime = "";
 String minutetime = "";
@@ -32,8 +35,8 @@ SoftwareSerial gpsSerial(RXPin, TXPin);
 #define LED (2)
 
 // Wifi configuration
-const char* ssid = "Tr0nNET";
-const char* password = "!Vdn66aha";
+const char* ssid = "DESKTOP-EONMLP1 1596";
+const char* password = "76T{r870";
 
 // MQTT Configuration
 // if you have a hostname set for the MQTT server, you can use it here
@@ -41,11 +44,11 @@ const char *serverHostname = "broker.hivemq.com";
 
 
 // the topic we want to use
-const char* topic = "Project3/LDR_classroom/Martin";
-const char* topic2 = "Project3/Temperature_classroom/Martin";
-const char* topic3 = "Project3/GPS_location/Martin";
-const char* topic4 = "Project3/GPS_time/Martin";
-const char* topic5 = "Project3/Humidity_classroom/Martin";
+const char* topic = "Project3/LDR_classroom/Mads";
+const char* topic2 = "Project3/Temperature_classroom/Mads";
+const char* topic3 = "Project3/GPS_location/Mads";
+const char* topic4 = "Project3/GPS_time/Mads";
+const char* topic5 = "Project3/Humidity_classroom/Mads";
 
 int ldr = A0;
 int value = 0;
@@ -116,6 +119,7 @@ void setup()
 void loop() 
 {
     Serial.println("Godmorgen jeg er klar igen!");
+//    Serial.println(timer);
     if (!client.connected()) 
       {
       connectMQTT();
@@ -129,7 +133,14 @@ void loop()
       display_values();
       displayInfo();
       TempHumi();
-      ESP.deepSleep(600e6); //10 min delay når lys nivauet er acceptabelt
+      secondTimer = millis();
+      if (secondTimer - timer > 11000)
+      {
+        Serial.println("sleeping");
+        ESP.deepSleep(600e5);
+      }
+//      Serial.println("Sleeping");
+//      ESP.deepSleep(600e6); //10 min delay når lys nivauet er acceptabelt
     }
     else
     {   
